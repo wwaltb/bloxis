@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://firuxtrd23mq"]
+
+[ext_resource type="PackedScene" uid="uid://l424hs4igorh" path="res://tile_map.tscn" id="1_t3f8f"]
+
+[node name="Main" type="Node"]
+
+[node name="TileMap" parent="." instance=ExtResource("1_t3f8f")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(50, 250)
+zoom = Vector2(0.75, 0.75)
