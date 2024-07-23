@@ -5,7 +5,9 @@
 [node name="Main" type="Node"]
 
 [node name="TileMap" parent="." instance=ExtResource("1_t3f8f")]
+scale = Vector2(1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(50, 250)
+position = Vector2(0, 25)
+offset = Vector2(50, 262.805)
 zoom = Vector2(0.75, 0.75)
