@@ -1,4 +1,8 @@
 extends Node
+## Use this class when dealing with the tilemap cardinal directions
+##
+## Provides direction constants @N, @E, @S, @W and the functions needed to
+## interact with directions like a compass.
 
 const NUM_DIRS = 4
 
