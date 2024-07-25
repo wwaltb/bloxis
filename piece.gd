@@ -7,6 +7,10 @@ var cells: Array[Vector2i]  ## The list of cells the piece occupies at the origi
 
 var position = Vector2i(0, 0)
 
+## Add @offset to the piece's position.
+func move_piece(offset: Vector2i):
+    position += offset
+
 ## Rotates the piece to the right
 func rotate_right() -> void:
     # replace @to and @from of each @road with its rotated value and rebuild @cells
@@ -53,7 +57,6 @@ func _generate_piece() -> void:
             cells.append(cells[i-1] + Compass.get_vector2i(roads[i-1].to))  # the cell that the previous road points to
     # center piece around it's middle/end
     _center_piece()
-
 
 ## Center @cells around the second road, as this is either the ## middle or end
 ## of a piece. Needs to be called after any function which otherwise changes
