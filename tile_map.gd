@@ -34,8 +34,8 @@ const TRUCK_ATLAS = {
 const TRUCK_START = Vector2i(10, 19)
 const TRUCK_GOAL = Vector2i(8, -1)
 const TRUCK_END = Vector2i(-2, -6)
-const TRUCK_DELAY = 20
-const TRUCK_RATE = 1
+const TRUCK_DELAY = 60
+const TRUCK_RATE = 1.5
 
 const DAS_DELAY = 0.28
 const DAS_RATE = 0.05
@@ -151,24 +151,35 @@ func _process(delta):
     get_node("Score").text = str(score)
 
 
+# move to road class
 # Returns a random road tile key
 func _get_random_road() -> String:
     var keys = ROAD_ATLAS.keys()
     return keys[randi() % keys.size()]
 
+# cardinal direction class
 func _get_opposite_dir(dir) -> String:
     match dir:
         "N":
+            print("string ver: S")
+            print(Compass.get_rotate_180(Compass.N))
             return "S"    
         "E":
+            print("string ver: W")
+            print(Compass.get_rotate_180(Compass.E))
             return "W"
         "S":
+            print("string ver: N")
+            print(Compass.get_rotate_180(Compass.S))
             return "N"
         "W":
+            print("string ver: E")
+            print(Compass.get_rotate_180(Compass.W))
             return "E"
         _:
             return "ERROR"
 
+# cardinal direction class
 func _get_next_cell(cell, dir) -> Vector2i:
     match dir:
         "N":
@@ -182,6 +193,8 @@ func _get_next_cell(cell, dir) -> Vector2i:
         _:
             return cell
 
+# move to road class
+# if we key roads by one direction at a time this can be much smarter than checking random raods
 func _generate_next_road(prev_road) -> String:
     var road = ""
 
@@ -194,6 +207,7 @@ func _generate_next_road(prev_road) -> String:
 
     return road
 
+# move to piece class
 func _generate_piece(tiles) -> Piece:
     var piece = Piece.new()
     var road = ""
@@ -255,6 +269,7 @@ func _new_active_piece():
     active_piece.position = Vector2i(5, 5)
     _draw_piece(active_piece, 1)
 
+# move to piece class
 func _center_piece(piece):
     if piece.tiles < 3:
         return
@@ -265,6 +280,7 @@ func _center_piece(piece):
     for i in range(piece.tiles):
         piece.cells[i] += offset
 
+# move to piece class
 func _is_loop(piece) -> bool:
     if piece.tiles < 3:
         return false
@@ -280,6 +296,7 @@ func _is_loop(piece) -> bool:
     else:
         return false
 
+# cardinal direction class ?
 func _rotate_dir_right(dir) -> String:
     match dir:
         "N":
@@ -293,6 +310,7 @@ func _rotate_dir_right(dir) -> String:
         _:
             return "ERROR"
 
+# cardinal direction class ?
 func _rotate_dir_left(dir) -> String:
     match dir:
         "N":
@@ -306,6 +324,7 @@ func _rotate_dir_left(dir) -> String:
         _:
             return "ERROR"
 
+# move to piece class
 func _rotate_piece_right(piece):
     var cell = Vector2i(0, 0)
     for i in range(piece.tiles):
@@ -318,6 +337,7 @@ func _rotate_piece_right(piece):
 
         cell = _get_next_cell(cell, road[1])
 
+# move to piece class
 func _rotate_piece_left(piece):
     var cell = Vector2i(0, 0)
     for i in range(piece.tiles):
@@ -370,6 +390,7 @@ func _place_piece():
 
     return true
 
+# Move to truck class
 # update trucks position and direction
 # returns true on success, false if crash
 func _move_truck(truck) -> bool:
@@ -451,11 +472,13 @@ func _move_truck(truck) -> bool:
 
     return true
 
+# Move to truck class
 func _new_truck():
     var truck = Truck.new()
     set_cell(4, truck.pos, TRUCK_ID, TRUCK_ATLAS[truck.dir])
     trucks.append(truck)
 
+# Move to truck class
 func _update_trucks(delta):
     for truck in trucks:
         truck.rate -= delta
@@ -475,6 +498,7 @@ func _update_trucks(delta):
                 game_over = true
                 get_node("GameOver").show()
 
+# Move to refcounted
 class Piece:
     var tiles: int = 0
     var roads = []
@@ -487,6 +511,7 @@ class Piece:
         roads.append(road)
         cells.append(cell)
 
+# Move to truck tile map
 class Truck:
     var pos := TRUCK_START
     var dir: String = "NS"
