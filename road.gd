@@ -26,7 +26,7 @@ const ROAD_ATLAS: Dictionary = {
         Compass.N: Vector2i(10, 0),
         Compass.E: Vector2i(8, 0),
         Compass.S: Vector2i(5, 0),
-    }
+    },
 }
 
 var from: int   ## The direction this road comes from

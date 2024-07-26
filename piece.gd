@@ -1,4 +1,4 @@
-#class_name Piece
+class_name Piece
 extends RefCounted
 
 var size: int = 0
