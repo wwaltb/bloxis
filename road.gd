@@ -32,13 +32,16 @@ const ROAD_ATLAS: Dictionary = {
 var from: int   ## The direction this road comes from
 var to: int     ## The direction this road goes to
 
+
 ## Returns the road's tileset id.
 func get_id() -> int:
     return ROAD_ID
 
+
 ## Returns the tileset atlas coordinates for the road's sprite.
 func get_atlas_coords() -> Vector2i:
     return ROAD_ATLAS[from][to]
+
 
 ## Generates a new road. If @prev road is given the new road will connect to
 ## it.

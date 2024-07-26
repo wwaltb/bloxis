@@ -2,14 +2,17 @@ class_name Piece
 extends RefCounted
 
 var size: int = 0
+
 var roads: Array[Road]      ## The list of roads in the piece
 var cells: Array[Vector2i]  ## The list of cells the piece occupies at the origin
 
 var position = Vector2i(0, 0)
 
+
 ## Add @offset to the piece's position.
 func move_piece(offset: Vector2i):
     position += offset
+
 
 ## Rotates the piece to the right
 func rotate_right() -> void:
@@ -26,6 +29,7 @@ func rotate_right() -> void:
     # make sure piece is centered afterwards
     _center_piece()
 
+
 ## Rotates the piece to the left
 func rotate_left() -> void:
     # replace @to and @from of each @road with its rotated value and rebuild @cells
@@ -41,10 +45,12 @@ func rotate_left() -> void:
     # make sure piece is centered afterwards
     _center_piece()
 
+
 ## Initialize a new piece with @n roads
 func _init(n: int) -> void:
     size = n
     _generate_piece()
+
 
 ## Generate the piece's roads and cells
 func _generate_piece() -> void:
@@ -57,6 +63,7 @@ func _generate_piece() -> void:
             cells.append(cells[i-1] + Compass.get_vector2i(roads[i-1].to))  # the cell that the previous road points to
     # center piece around it's middle/end
     _center_piece()
+
 
 ## Center @cells around the second road, as this is either the ## middle or end
 ## of a piece. Needs to be called after any function which otherwise changes
