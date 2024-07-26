@@ -20,7 +20,9 @@ func get_random() -> int:
 
 ## returns a random direction other than @dir
 func get_random_other_than(dir: int) -> int:
-    return (dir + randi() % 3) % NUM_DIRS
+    var rand_offset = 1 + randi() % 3
+    var other = (dir + rand_offset) % NUM_DIRS
+    return other
 
 ## returns the vector corresponding to a compass direction
 func get_vector2i(dir: int) -> Vector2i:
