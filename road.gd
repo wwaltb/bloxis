@@ -43,13 +43,22 @@ func get_atlas_coords() -> Vector2i:
     return ROAD_ATLAS[from][to]
 
 
-## Generates a new road. If @prev road is given the new road will connect to
-## it.
-func _init(prev: Road = null) -> void:
-    # generate from direction
-    if prev:
-        from = Compass.get_rotate_180(prev.to)
-    else:
+## Generates a new random road. If @prev road is given the new road will
+## connect to it.
+
+## Creates a new road with random directions unless given through @f and/or @t
+func _init(f: int = -1, t: int = -1) -> void:
+    # try to assign @to and @from based on @t and @f
+    if f >= 0:
+        from = f
+    if t >= 0:
+        to = t
+    # t is given but f is not
+    if t >= 0 and f < 0:
+        from = Compass.get_random_other_than(to)
+    # finally just if f is not given
+    elif f < 0:
         from = Compass.get_random()
-    # generate to direction
-    to = Compass.get_random_other_than(from)
+    # ensure @to is different than @from
+    if t < 0 or t == f:
+        to = Compass.get_random_other_than(from)
