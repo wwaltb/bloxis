@@ -500,7 +500,7 @@ func _update_trucks(delta):
                 get_node("GameOver").show()
 
 # Move to refcounted
-class Piece:
+class Piecex:
     var tiles: int = 0
     var roads = []
     var cells = []
