@@ -3,10 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://cx6yso64tr5jx" path="res://roads.png" id="1_jn67u"]
 [ext_resource type="Texture2D" uid="uid://cxnj0twgouwfc" path="res://grass.png" id="1_xrepl"]
 [ext_resource type="Texture2D" uid="uid://cgktu7j8e6w3x" path="res://redTruck.png" id="3_ekw1o"]
-[ext_resource type="Script" path="res://ground_map.gd" id="4_st7af"]
+[ext_resource type="Script" path="res://scripts/ground_map.gd" id="4_f1oyv"]
 [ext_resource type="FontFile" uid="uid://ylym68ht7gc2" path="res://Fonts/Kenney Pixel.ttf" id="5_p7eos"]
 [ext_resource type="FontFile" uid="uid://fpne5edliv7g" path="res://Fonts/Kenney High.ttf" id="6_msg0x"]
-[ext_resource type="Script" path="res://GameOver.gd" id="7_0iqiv"]
+[ext_resource type="Script" path="res://scripts/GameOver.gd" id="7_a0oux"]
 [ext_resource type="FontFile" uid="uid://cicywod6m1x45" path="res://Fonts/Kenney Pixel Square.ttf" id="7_es6gq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mcvg1"]
@@ -151,7 +151,7 @@ layer_4/name = "truck"
 layer_4/y_sort_enabled = true
 layer_4/z_index = 100
 layer_4/tile_data = PackedInt32Array()
-script = ExtResource("4_st7af")
+script = ExtResource("4_f1oyv")
 
 [node name="Label" type="Label" parent="."]
 z_index = 180
@@ -181,7 +181,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("7_0iqiv")
+script = ExtResource("7_a0oux")
 
 [node name="ColorRect" type="ColorRect" parent="GameOver"]
 z_index = 150
