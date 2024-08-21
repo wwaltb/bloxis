@@ -1,13 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://firuxtrd23mq"]
+[gd_scene load_steps=3 format=3 uid="uid://firuxtrd23mq"]
 
 [ext_resource type="PackedScene" uid="uid://l424hs4igorh" path="res://tile_map.tscn" id="1_t3f8f"]
+[ext_resource type="PackedScene" uid="uid://tdixbmn5xeva" path="res://game_map.tscn" id="2_r6kih"]
 
 [node name="Main" type="Node"]
 
 [node name="TileMap" parent="." instance=ExtResource("1_t3f8f")]
+visible = false
 scale = Vector2(1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 25)
-offset = Vector2(50, 262.805)
-zoom = Vector2(0.75, 0.75)
+
+[node name="TileMap2" parent="." instance=ExtResource("2_r6kih")]

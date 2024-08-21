@@ -19,6 +19,14 @@ config/icon="res://icon.svg"
 
 Compass="*res://scripts/compass.gd"
 
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=480
+window/stretch/mode="canvas_items"
+window/stretch/scale=2.0
+window/stretch/scale_mode="integer"
+
 [input]
 
 rotate_right={
