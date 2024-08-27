@@ -23,8 +23,10 @@ Compass="*res://scripts/compass.gd"
 
 window/size/viewport_width=640
 window/size/viewport_height=480
-window/stretch/mode="canvas_items"
-window/stretch/scale=2.0
+window/size/window_width_override=1280
+window/size/window_height_override=960
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
 window/stretch/scale_mode="integer"
 
 [input]

@@ -5,27 +5,27 @@ extends RefCounted
 ## Uses @from and @to to track the directions the road points. @get_id() and
 ## @get_atlas_coords() provide the id and coordinates for the road's sprite.
 
-const ROAD_ID: int = 11
+const ROAD_ID: int = 1
 const ROAD_ATLAS: Dictionary = {
     Compass.N: {
-        Compass.E: Vector2i(9, 0),
-        Compass.S: Vector2i(6, 0),
-        Compass.W: Vector2i(10, 0),
+        Compass.E: Vector2i(2, 0),
+        Compass.S: Vector2i(0, 0),
+        Compass.W: Vector2i(1, 0),
     },
     Compass.E: {
-        Compass.N: Vector2i(9, 0),
-        Compass.S: Vector2i(7, 0),
-        Compass.W: Vector2i(8, 0),
+        Compass.N: Vector2i(4, 0),
+        Compass.S: Vector2i(3, 0),
+        Compass.W: Vector2i(0, 0),
     },
     Compass.S: {
-        Compass.N: Vector2i(6, 0),
-        Compass.E: Vector2i(7, 0),
-        Compass.W: Vector2i(5, 0),
+        Compass.N: Vector2i(0, 0),
+        Compass.E: Vector2i(2, 0),
+        Compass.W: Vector2i(1, 0),
     },
     Compass.W: {
-        Compass.N: Vector2i(10, 0),
-        Compass.E: Vector2i(8, 0),
-        Compass.S: Vector2i(5, 0),
+        Compass.N: Vector2i(4, 0),
+        Compass.E: Vector2i(0, 0),
+        Compass.S: Vector2i(3, 0),
     },
 }
 

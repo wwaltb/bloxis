@@ -17,7 +17,7 @@ var current_roads: Dictionary
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     _new_active_piece()
-    _draw_piece(piece_machine.active(), 1)
+    _draw_piece(piece_machine.active(), 2)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -89,7 +89,7 @@ func _handle_placement() -> void:
 
 ## Handles piece controlling inputs and update the active piece accordingly.
 func _update_active_piece(delta: float) -> void:
-    _clear_piece(piece_machine.active(), 1)
+    _clear_piece(piece_machine.active(), 2)
 
     _handle_movement(delta)
     _handle_rotation()
@@ -115,7 +115,7 @@ func _update_active_piece(delta: float) -> void:
         das_repeat_count = DAS_RATE
 
     # draw the piece again
-    _draw_piece(piece_machine.active(), 1)
+    _draw_piece(piece_machine.active(), 2)
 
     _handle_placement()
 
@@ -126,9 +126,9 @@ func _is_piece_out_of_bounds() -> bool:
     var outside: bool = false
     for i in range(piece.size):
         var cell_pos: Vector2i = piece.cells[i] + piece.position 
-        if cell_pos.x < 0 or cell_pos.x > 10:
+        if cell_pos.x < 0 or cell_pos.x > 9:
             outside = true
-        if cell_pos.y < 0 or cell_pos.y > 10:
+        if cell_pos.y < 0 or cell_pos.y > 9:
             outside = true
     return outside
 
@@ -146,8 +146,8 @@ func _is_piece_placeable() -> bool:
 ## Places the active piece in the permanent tile layer and gets a new active
 ## piece.
 func _place_piece() -> void:
-    _clear_piece(piece_machine.active(), 1)
-    _draw_piece(piece_machine.active(), 0)
+    _clear_piece(piece_machine.active(), 2)
+    _draw_piece(piece_machine.active(), 1)
     _new_active_piece()
 
 
@@ -163,7 +163,7 @@ func _draw_piece(piece: Piece, layer: int) -> void:
         var cell: Vector2i = piece.position + piece.cells[i]
         set_cell(layer, cell, road.get_id(), road.get_atlas_coords())
 
-        if layer == 0:
+        if layer == 1:
             current_roads[cell] = road
 
 
