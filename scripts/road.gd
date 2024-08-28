@@ -1,5 +1,6 @@
 class_name Road
 extends RefCounted
+# ! Old code, but could possibly reuse for tiles, maybe just treat straight tiles as blank ones
 ## Keeps track of the directions each road points and which sprite they are
 ##
 ## Uses @from and @to to track the directions the road points. @get_id() and

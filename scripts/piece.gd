@@ -52,6 +52,26 @@ func add_road(road: Road) -> void:
     size += 1
 
 
+func is_out_of_bounds() -> bool:
+    for i in range(size):
+        var cell: Vector2i = position + cells[i]
+        if cell.x < 0 or cell.x > GameBoard.MAX_X:
+            return true
+        if cell.y < 0 or cell.y > GameBoard.MAX_Y:
+            return true
+    return false
+
+
+func is_placeable() -> bool:
+    if self.is_out_of_bounds():
+        return false
+    for i in range(size):
+        var cell: Vector2i = position + cells[i]
+        if GameBoard.current_tiles.has(cell):
+            return false
+    return true
+
+
 ## Initialize a new piece that connects the given directions starting from
 ## North.
 func _init(dirs: Array[int]) -> void:
