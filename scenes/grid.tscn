@@ -1,13 +1,12 @@
-[gd_scene load_steps=9 format=4 uid="uid://tdixbmn5xeva"]
+[gd_scene load_steps=8 format=4 uid="uid://cxx55hw0nhryn"]
 
-[ext_resource type="Texture2D" uid="uid://emetobrp72e" path="res://sprites/cube_48.png" id="1_smi8m"]
-[ext_resource type="Texture2D" uid="uid://cgutgykw2bbk3" path="res://sprites/grid_tiles_48.png" id="2_4bd60"]
-[ext_resource type="Texture2D" uid="uid://h7a6w5dls442" path="res://sprites/piece_tiles_48.png" id="2_12dk5"]
-[ext_resource type="Script" path="res://scripts/ground_map.gd" id="3_4urhi"]
+[ext_resource type="Texture2D" uid="uid://emetobrp72e" path="res://sprites/cube_48.png" id="1_v3kij"]
+[ext_resource type="Texture2D" uid="uid://h7a6w5dls442" path="res://sprites/piece_tiles_48.png" id="2_rybdm"]
+[ext_resource type="Texture2D" uid="uid://cgutgykw2bbk3" path="res://sprites/grid_tiles_48.png" id="3_671v8"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eyamr"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l84ms"]
 resource_name = "cube"
-texture = ExtResource("1_smi8m")
+texture = ExtResource("1_v3kij")
 texture_region_size = Vector2i(96, 96)
 0:1/animation_frame_0/duration = 0.1
 0:1/animation_frame_1/duration = 0.1
@@ -48,8 +47,8 @@ texture_region_size = Vector2i(96, 96)
 0:4/0 = 0
 0:4/0/texture_origin = Vector2i(0, 24)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bnars"]
-texture = ExtResource("2_12dk5")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ppb18"]
+texture = ExtResource("2_rybdm")
 texture_region_size = Vector2i(48, 48)
 0:0/0 = 0
 1:0/0 = 0
@@ -57,8 +56,8 @@ texture_region_size = Vector2i(48, 48)
 3:0/0 = 0
 4:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l7fph"]
-texture = ExtResource("2_4bd60")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c5x7y"]
+texture = ExtResource("3_671v8")
 texture_region_size = Vector2i(48, 48)
 0:0/0 = 0
 0:1/0 = 0
@@ -70,42 +69,18 @@ texture_region_size = Vector2i(48, 48)
 2:1/0 = 0
 2:0/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_y4y2f"]
+[sub_resource type="TileSet" id="TileSet_csfey"]
 tile_shape = 1
 tile_layout = 5
 tile_offset_axis = 1
 tile_size = Vector2i(48, 24)
-sources/2 = SubResource("TileSetAtlasSource_l7fph")
-sources/1 = SubResource("TileSetAtlasSource_bnars")
-sources/0 = SubResource("TileSetAtlasSource_eyamr")
+sources/2 = SubResource("TileSetAtlasSource_c5x7y")
+sources/1 = SubResource("TileSetAtlasSource_ppb18")
+sources/0 = SubResource("TileSetAtlasSource_l84ms")
 
-[node name="TileMap" type="TileMap"]
-y_sort_enabled = true
-tile_set = SubResource("TileSet_y4y2f")
-format = 2
-script = ExtResource("3_4urhi")
-
-[node name="grid" type="TileMapLayer" parent="."]
+[node name="Grid" type="TileMapLayer"]
 modulate = Color(1, 1, 1, 0.494118)
 y_sort_enabled = true
 use_parent_material = true
 tile_map_data = PackedByteArray("AAAAAAAAAgABAAEAAAABAAAAAgAAAAEAAAACAAAAAgAAAAEAAAADAAAAAgAAAAEAAAAEAAAAAgAAAAEAAAAFAAAAAgAAAAEAAAAGAAAAAgAAAAEAAAAHAAAAAgAAAAEAAAAIAAAAAgAAAAEAAAAJAAAAAgABAAAAAAAJAAEAAgACAAIAAAAJAAIAAgACAAIAAAAJAAMAAgACAAIAAAAJAAQAAgACAAIAAAAJAAgAAgACAAIAAAAJAAcAAgACAAIAAAAJAAYAAgACAAIAAAAJAAUAAgACAAIAAAAJAAkAAgABAAIAAAAIAAkAAgAAAAIAAAAHAAkAAgAAAAIAAAAGAAkAAgAAAAIAAAAFAAkAAgAAAAIAAAAEAAkAAgAAAAIAAAADAAkAAgAAAAIAAAACAAkAAgAAAAIAAAAAAAgAAgACAAAAAAAAAAcAAgACAAAAAAAAAAYAAgACAAAAAAAAAAUAAgACAAAAAAAAAAQAAgACAAAAAAAAAAMAAgACAAAAAAAAAAIAAgACAAAAAAAAAAEAAgACAAAAAAACAAUAAgAAAAAAAAACAAQAAgAAAAAAAAACAAMAAgAAAAAAAAACAAIAAgAAAAAAAAACAAEAAgAAAAAAAAABAAEAAgAAAAAAAAABAAIAAgAAAAAAAAABAAMAAgAAAAAAAAABAAQAAgAAAAAAAAABAAUAAgAAAAAAAAABAAYAAgAAAAAAAAABAAcAAgAAAAAAAAACAAYAAgAAAAAAAAADAAYAAgAAAAAAAAADAAUAAgAAAAAAAAADAAQAAgAAAAAAAAADAAMAAgAAAAAAAAADAAIAAgAAAAAAAAADAAEAAgAAAAAAAAAEAAEAAgAAAAAAAAAEAAIAAgAAAAAAAAAEAAMAAgAAAAAAAAAEAAQAAgAAAAAAAAAEAAUAAgAAAAAAAAAEAAYAAgAAAAAAAAAEAAcAAgAAAAAAAAADAAcAAgAAAAAAAAADAAgAAgAAAAAAAAAEAAgAAgAAAAAAAAAFAAgAAgAAAAAAAAAFAAcAAgAAAAAAAAAFAAYAAgAAAAAAAAAFAAUAAgAAAAAAAAAFAAQAAgAAAAAAAAAFAAMAAgAAAAAAAAAFAAIAAgAAAAAAAAAFAAEAAgAAAAAAAAAGAAEAAgAAAAAAAAAGAAIAAgAAAAAAAAAGAAMAAgAAAAAAAAAGAAQAAgAAAAAAAAAGAAUAAgAAAAAAAAAGAAYAAgAAAAAAAAAGAAcAAgAAAAAAAAAGAAgAAgAAAAAAAAAHAAgAAgAAAAAAAAAHAAcAAgAAAAAAAAAHAAYAAgAAAAAAAAAHAAUAAgAAAAAAAAAHAAQAAgAAAAAAAAAHAAMAAgAAAAAAAAAHAAIAAgAAAAAAAAAHAAEAAgAAAAAAAAAIAAEAAgAAAAAAAAAIAAIAAgAAAAAAAAAIAAMAAgAAAAAAAAAIAAQAAgAAAAAAAAAIAAUAAgAAAAAAAAAIAAYAAgAAAAAAAAAIAAcAAgAAAAAAAAAIAAgAAgAAAAAAAAACAAcAAgAAAAAAAAACAAgAAgAAAAAAAAABAAgAAgAAAAAAAAABAAkAAgAAAAIAAAAAAAkAAgACAAEAAAA=")
-tile_set = SubResource("TileSet_y4y2f")
-
-[node name="pieces" type="TileMapLayer" parent="."]
-y_sort_enabled = true
-use_parent_material = true
-tile_set = SubResource("TileSet_y4y2f")
-
-[node name="active" type="TileMapLayer" parent="."]
-modulate = Color(0.784314, 0.784314, 0.784314, 0.784314)
-y_sort_enabled = true
-use_parent_material = true
-tile_set = SubResource("TileSet_y4y2f")
-
-[node name="cube" type="TileMapLayer" parent="."]
-z_index = 1
-y_sort_enabled = true
-use_parent_material = true
-tile_map_data = PackedByteArray("AAAEAAYAAAAAAAEAAAA=")
-tile_set = SubResource("TileSet_y4y2f")
+tile_set = SubResource("TileSet_csfey")

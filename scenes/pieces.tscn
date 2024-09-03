@@ -1,0 +1,96 @@
+[gd_scene load_steps=10 format=3 uid="uid://bhk5h8m2bcty"]
+
+[ext_resource type="Texture2D" uid="uid://emetobrp72e" path="res://sprites/cube_48.png" id="1_6dq04"]
+[ext_resource type="Script" path="res://scripts/controller.gd" id="1_df3wm"]
+[ext_resource type="Texture2D" uid="uid://h7a6w5dls442" path="res://sprites/piece_tiles_48.png" id="2_xrykw"]
+[ext_resource type="Texture2D" uid="uid://cgutgykw2bbk3" path="res://sprites/grid_tiles_48.png" id="3_23jpw"]
+[ext_resource type="Script" path="res://scripts/active.gd" id="5_e6x1w"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k6171"]
+resource_name = "cube"
+texture = ExtResource("1_6dq04")
+texture_region_size = Vector2i(96, 96)
+0:1/animation_frame_0/duration = 0.1
+0:1/animation_frame_1/duration = 0.1
+0:1/animation_frame_2/duration = 0.2
+0:1/animation_frame_3/duration = 0.1
+0:1/animation_frame_4/duration = 0.1
+0:1/animation_frame_5/duration = 0.1
+0:1/animation_frame_6/duration = 0.1
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, 24)
+0:3/animation_frame_0/duration = 0.1
+0:3/animation_frame_1/duration = 0.1
+0:3/animation_frame_2/duration = 0.2
+0:3/animation_frame_3/duration = 0.1
+0:3/animation_frame_4/duration = 0.1
+0:3/animation_frame_5/duration = 0.1
+0:3/animation_frame_6/duration = 0.1
+0:3/0 = 0
+0:3/0/texture_origin = Vector2i(0, 24)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 24)
+0:2/animation_frame_0/duration = 0.1
+0:2/animation_frame_1/duration = 0.1
+0:2/animation_frame_2/duration = 0.2
+0:2/animation_frame_3/duration = 0.1
+0:2/animation_frame_4/duration = 0.1
+0:2/animation_frame_5/duration = 0.1
+0:2/animation_frame_6/duration = 0.1
+0:2/0 = 0
+0:2/0/texture_origin = Vector2i(0, 24)
+0:4/animation_frame_0/duration = 0.1
+0:4/animation_frame_1/duration = 0.1
+0:4/animation_frame_2/duration = 0.2
+0:4/animation_frame_3/duration = 0.1
+0:4/animation_frame_4/duration = 0.1
+0:4/animation_frame_5/duration = 0.1
+0:4/animation_frame_6/duration = 0.1
+0:4/0 = 0
+0:4/0/texture_origin = Vector2i(0, 24)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o1xk0"]
+texture = ExtResource("2_xrykw")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kpvqg"]
+texture = ExtResource("3_23jpw")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+0:1/0 = 0
+1:0/0 = 0
+1:1/0 = 0
+1:2/0 = 0
+0:2/0 = 0
+2:2/0 = 0
+2:1/0 = 0
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_kpvlg"]
+tile_shape = 1
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(48, 24)
+sources/2 = SubResource("TileSetAtlasSource_kpvqg")
+sources/1 = SubResource("TileSetAtlasSource_o1xk0")
+sources/0 = SubResource("TileSetAtlasSource_k6171")
+
+[node name="Controller" type="Node"]
+script = ExtResource("1_df3wm")
+
+[node name="Board" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+use_parent_material = true
+tile_set = SubResource("TileSet_kpvlg")
+
+[node name="Active" type="TileMapLayer" parent="."]
+modulate = Color(0.784314, 0.784314, 0.784314, 0.784314)
+y_sort_enabled = true
+use_parent_material = true
+tile_set = SubResource("TileSet_kpvlg")
+script = ExtResource("5_e6x1w")

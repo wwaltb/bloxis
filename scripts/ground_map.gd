@@ -58,7 +58,6 @@ func _handle_movement(delta: float) -> void:
     if Input.is_action_pressed("move_right"):
         input_dir.x += 1
 
-
     # increment das counter when input_dir is nonzero
     if input_dir:
         das_count += delta
