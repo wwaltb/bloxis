@@ -89,7 +89,6 @@ use_parent_material = true
 tile_set = SubResource("TileSet_kpvlg")
 
 [node name="Active" type="TileMapLayer" parent="."]
-modulate = Color(0.784314, 0.784314, 0.784314, 0.784314)
 y_sort_enabled = true
 use_parent_material = true
 tile_set = SubResource("TileSet_kpvlg")
