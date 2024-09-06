@@ -4,7 +4,7 @@ extends TileMap
 const DAS_DELAY = 0.28
 const DAS_RATE = 0.05
 
-var das_count = 0;
+var das_count = 0
 var das_repeat_count = DAS_RATE
 var move_dir: Vector2i = Vector2i.ZERO
 var input_dir: Vector2i = Vector2i.ZERO

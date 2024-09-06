@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bhk5h8m2bcty"]
+[gd_scene load_steps=11 format=3 uid="uid://bhk5h8m2bcty"]
 
 [ext_resource type="Texture2D" uid="uid://emetobrp72e" path="res://sprites/cube_48.png" id="1_6dq04"]
 [ext_resource type="Script" path="res://scripts/controller.gd" id="1_df3wm"]
 [ext_resource type="Texture2D" uid="uid://h7a6w5dls442" path="res://sprites/piece_tiles_48.png" id="2_xrykw"]
 [ext_resource type="Texture2D" uid="uid://cgutgykw2bbk3" path="res://sprites/grid_tiles_48.png" id="3_23jpw"]
+[ext_resource type="Script" path="res://scripts/board.gd" id="5_2gvnk"]
 [ext_resource type="Script" path="res://scripts/active.gd" id="5_e6x1w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k6171"]
@@ -80,13 +81,15 @@ sources/2 = SubResource("TileSetAtlasSource_kpvqg")
 sources/1 = SubResource("TileSetAtlasSource_o1xk0")
 sources/0 = SubResource("TileSetAtlasSource_k6171")
 
-[node name="Controller" type="Node"]
+[node name="Controller" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_df3wm")
 
 [node name="Board" type="TileMapLayer" parent="."]
 y_sort_enabled = true
 use_parent_material = true
 tile_set = SubResource("TileSet_kpvlg")
+script = ExtResource("5_2gvnk")
 
 [node name="Active" type="TileMapLayer" parent="."]
 y_sort_enabled = true

@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 const ACTIONS_DICT: Dictionary = {
     Vector2i.UP: "move_forward",
@@ -8,7 +8,7 @@ const ACTIONS_DICT: Dictionary = {
 }
 
 const DAS_DELAY: float = 0.28
-const DAS_RATE: float = 0.05
+const DAS_RATE: float = 0.058
 
 @onready var board: TileMapLayer = $Board
 @onready var active: Active = $Active
@@ -97,3 +97,7 @@ func _check_just_pressed() -> void:
     for dir in ACTIONS_DICT:
         if Input.is_action_just_pressed(ACTIONS_DICT[dir]):
             das_dir_stack.push_back(dir)
+
+
+func _handle_placement_input() -> void:
+    
