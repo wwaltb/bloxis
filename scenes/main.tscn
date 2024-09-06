@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://firuxtrd23mq"]
+
+[ext_resource type="PackedScene" uid="uid://djdtemfo5eae5" path="res://scenes/game.tscn" id="1_j1o14"]
+[ext_resource type="Texture2D" uid="uid://cosenwmtt7crd" path="res://sprites/stars.png" id="3_a8yjq"]
+[ext_resource type="PackedScene" uid="uid://bacf3gaq5dujt" path="res://scenes/background.tscn" id="3_bsnm2"]
+[ext_resource type="Texture2D" uid="uid://c4414vg8qksjo" path="res://sprites/stars_2.png" id="4_rkcnc"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j0yho"]
+texture = ExtResource("3_a8yjq")
+texture_region_size = Vector2i(128, 96)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1c17m"]
+texture = ExtResource("4_rkcnc")
+texture_region_size = Vector2i(128, 96)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_haht0"]
+tile_size = Vector2i(128, 96)
+sources/0 = SubResource("TileSetAtlasSource_j0yho")
+sources/1 = SubResource("TileSetAtlasSource_1c17m")
+
+[node name="Main" type="Node"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(32, 144)
+
+[node name="Node" parent="." instance=ExtResource("1_j1o14")]
+
+[node name="Background" parent="." instance=ExtResource("3_bsnm2")]
+z_index = -1
+position = Vector2(-160, 0)
+tile_set = SubResource("TileSet_haht0")

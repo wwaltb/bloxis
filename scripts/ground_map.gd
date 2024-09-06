@@ -4,7 +4,7 @@ extends TileMap
 const DAS_DELAY = 0.28
 const DAS_RATE = 0.05
 
-var das_count = 0;
+var das_count = 0
 var das_repeat_count = DAS_RATE
 var move_dir: Vector2i = Vector2i.ZERO
 var input_dir: Vector2i = Vector2i.ZERO
@@ -57,7 +57,6 @@ func _handle_movement(delta: float) -> void:
 
     if Input.is_action_pressed("move_right"):
         input_dir.x += 1
-
 
     # increment das counter when input_dir is nonzero
     if input_dir:

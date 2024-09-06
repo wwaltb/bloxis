@@ -2,19 +2,20 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dqkldnr72fjev"
-path="res://.godot/imported/Kenney Future Narrow.ttf-ccbd9c4790c1defcae8993af936d979d.fontdata"
+uid="uid://v2q0f6xx7m4e"
+path="res://.godot/imported/Kenney Rocket Square.ttf-912f6f20c68affcd872008e8d6c4c675.fontdata"
 
 [deps]
 
-source_file="res://Fonts/Kenney Future Narrow.ttf"
-dest_files=["res://.godot/imported/Kenney Future Narrow.ttf-ccbd9c4790c1defcae8993af936d979d.fontdata"]
+source_file="res://fonts/Kenney Rocket Square.ttf"
+dest_files=["res://.godot/imported/Kenney Rocket Square.ttf-912f6f20c68affcd872008e8d6c4c675.fontdata"]
 
 [params]
 
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

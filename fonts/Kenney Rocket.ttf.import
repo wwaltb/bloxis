@@ -2,19 +2,20 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://fpne5edliv7g"
-path="res://.godot/imported/Kenney High.ttf-dfebf436cb97c0cbe20f45d8a6d8c06d.fontdata"
+uid="uid://dyhof3h7xwni0"
+path="res://.godot/imported/Kenney Rocket.ttf-5954c4b5680edf2a8831bb0ee90353c2.fontdata"
 
 [deps]
 
-source_file="res://Fonts/Kenney High.ttf"
-dest_files=["res://.godot/imported/Kenney High.ttf-dfebf436cb97c0cbe20f45d8a6d8c06d.fontdata"]
+source_file="res://fonts/Kenney Rocket.ttf"
+dest_files=["res://.godot/imported/Kenney Rocket.ttf-5954c4b5680edf2a8831bb0ee90353c2.fontdata"]
 
 [params]
 
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

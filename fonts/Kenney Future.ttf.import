@@ -2,19 +2,20 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://ciwstvsr6h1ak"
-path="res://.godot/imported/Kenney High Square.ttf-b1f3572d339a01de1018a4859c9a54e6.fontdata"
+uid="uid://cc8pnsyl4mlw2"
+path="res://.godot/imported/Kenney Future.ttf-ff85032a337e841ccb239ef3b6928d6c.fontdata"
 
 [deps]
 
-source_file="res://Fonts/Kenney High Square.ttf"
-dest_files=["res://.godot/imported/Kenney High Square.ttf-b1f3572d339a01de1018a4859c9a54e6.fontdata"]
+source_file="res://fonts/Kenney Future.ttf"
+dest_files=["res://.godot/imported/Kenney Future.ttf-ff85032a337e841ccb239ef3b6928d6c.fontdata"]
 
 [params]
 
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
