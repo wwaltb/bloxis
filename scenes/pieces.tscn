@@ -92,6 +92,7 @@ tile_set = SubResource("TileSet_kpvlg")
 script = ExtResource("5_2gvnk")
 
 [node name="Active" type="TileMapLayer" parent="."]
+modulate = Color(1, 1, 1, 0.603922)
 y_sort_enabled = true
 use_parent_material = true
 tile_set = SubResource("TileSet_kpvlg")
