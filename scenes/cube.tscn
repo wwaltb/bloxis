@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsg844s72wkgj"]
+[gd_scene load_steps=9 format=3 uid="uid://bsg844s72wkgj"]
 
 [ext_resource type="Texture2D" uid="uid://emetobrp72e" path="res://sprites/cube_48.png" id="1_t47lx"]
 [ext_resource type="Texture2D" uid="uid://h7a6w5dls442" path="res://sprites/piece_tiles_48.png" id="2_6yo0m"]
 [ext_resource type="Texture2D" uid="uid://cgutgykw2bbk3" path="res://sprites/grid_tiles_48.png" id="3_18xli"]
+[ext_resource type="Script" path="res://scripts/cube.gd" id="4_sy7vc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_86fla"]
 resource_name = "cube"
@@ -83,3 +84,4 @@ z_index = 1
 y_sort_enabled = true
 use_parent_material = true
 tile_set = SubResource("TileSet_25u0n")
+script = ExtResource("4_sy7vc")

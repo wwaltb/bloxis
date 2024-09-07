@@ -1,12 +1,15 @@
 class_name Cube
-extends RefCounted
+extends TileMapLayer
 
-var atlas_source: TileSetAtlasSource
+var atlas_source: TileSetAtlasSource = tile_set.get_source(0)
 
 
-func _init(source: TileSetAtlasSource) -> void:
-    atlas_source = source
+func _ready() -> void:
     print(_get_anim_duration(Vector2i(0,3)))
+
+
+func _process(delta: float) -> void:
+    pass
 
 
 ## Get the time to play the animation of tile at @atlas_coords.
