@@ -23,11 +23,9 @@ sources/1 = SubResource("TileSetAtlasSource_1c17m")
 [node name="Main" type="Node"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(32, 144)
 
 [node name="Node" parent="." instance=ExtResource("1_j1o14")]
 
 [node name="Background" parent="." instance=ExtResource("3_bsnm2")]
 z_index = -1
-position = Vector2(-160, 0)
 tile_set = SubResource("TileSet_haht0")

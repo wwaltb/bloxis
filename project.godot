@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Compass="*res://scripts/compass.gd"
 GameBoard="*res://scripts/game_board.gd"
+Coords="*res://scripts/coords.gd"
 
 [display]
 

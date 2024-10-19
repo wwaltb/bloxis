@@ -1,110 +1,85 @@
 class_name Cube
-extends TileMapLayer
+extends AnimatedSprite2D
 
-const CUBE_SOURCE: int = 0
+var grid_position: Vector2i = Vector2i(0, 0)
+var start_tile: Vector2i
+var end_tile: Vector2i
 
-## Enum to keep track of the states of the cube. Follows the order of the
-## animations on the spritesheet and the first four (the moving animations)
-## follow the compass directions enum as well.
-enum States {
-    MOVING_BACKWARD,
-    MOVING_LEFT,
-    MOVING_FORWARD,
-    MOVING_RIGHT,
-    SPAWNING,
-    DONE,
-    DYING,
-    IDLE
+var anim_speed: float = 1.0
+
+var anim_queue: Array[StringName]
+
+var anim_exit_funcs: Dictionary = {
+    "dying": Callable(self, "_dying_exit"),
+    "idle": Callable(self, "_idle_exit"),
+    "moving_backward": Callable(self, "_moving_exit"),
+    "moving_forward": Callable(self, "_moving_exit"),
+    "moving_left": Callable(self, "_moving_exit"),
+    "moving_right": Callable(self, "_moving_exit"),
+    "spawning": Callable(self, "_spawning_exit"),
 }
 
-var atlas_source: TileSetAtlasSource = tile_set.get_source(CUBE_SOURCE)
-
-var tile_pos: Vector2i
-
-var start_tile: Vector2i = Vector2i(0,10)
-var end_tile: Vector2i = Vector2i(9,-1)
-
-var state_times: Dictionary = {
-    States.IDLE: 2.    
+var moving_dirs: Dictionary = {
+    "moving_backward": Compass.N,
+    "moving_forward": Compass.S,
+    "moving_left": Compass.E,
+    "moving_right": Compass.W,
+    Compass.N: "moving_backward",
+    Compass.S: "moving_forward",
+    Compass.E: "moving_left",
+    Compass.W: "moving_right",
 }
 
-var state_queue: Array[States]
-var current_state: States = States.SPAWNING
-var current_state_time: float = 0
-
-
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    _update_state_times()
-    tile_pos = start_tile
-    set_cell(tile_pos, CUBE_SOURCE, Vector2i(0, current_state))
+    grid_position = start_tile
+    play("spawning", anim_speed)
 
 
-func _process(delta: float) -> void:
-    current_state_time += delta
-    # start next state if time is up
-    if current_state_time >= state_times[current_state]:
-        current_state_time = 0
-        if state_queue.is_empty():
-            # HACK death
-            if current_state == States.DYING:
-                queue_free()
-                return
-            _update_state_queue()
-        current_state = state_queue.pop_back()
-        _enter_current_state()
-    # update tile map:
-    clear()
-    set_cell(tile_pos, CUBE_SOURCE, Vector2i(0, current_state))
-
-
-## Get the time to play the animation of tile at @atlas_coords.
-func _get_anim_duration(atlas_coords: Vector2i) -> float:
-    var total_duration: float = atlas_source.get_tile_animation_total_duration(atlas_coords) 
-    return total_duration / atlas_source.get_tile_animation_speed(atlas_coords)
-
-
-func _update_state_times() -> void:
-    # all states other than IDLE
-    for i in range(States.IDLE):
-        state_times[i] = _get_anim_duration(Vector2i(0, i))
-
-
-## Pushes next states to the queue. Never pushes IDLE last.
-func _update_state_queue() -> void:
-    # state is a moving state and corresponds to the dirs in @Compass
-    if current_state >= States.MOVING_FORWARD and current_state <= States.MOVING_RIGHT:
-        # check if tile is end
-        if tile_pos == end_tile:
-            state_queue.push_front(States.IDLE)
-            state_queue.push_front(States.DONE)
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+    if not is_playing():
+        anim_exit_funcs[animation].call()
+        if anim_queue.is_empty():
             return
-        # check if no tile
-        if not GameBoard.current_tiles.has(tile_pos):
-            state_queue.push_front(States.DYING)
-            return
+        play(anim_queue.pop_back(), anim_speed)
 
-        var dest_tile: Road = GameBoard.current_tiles[tile_pos]
-        # check if tile is blank
-        if dest_tile.to == Compass.get_rotate_180(dest_tile.from):
-            state_queue.push_front(States.IDLE)
-            state_queue.push_front(current_state)
-            return
-        # move according to tiles direction
-        state_queue.push_front(States.IDLE)
-        state_queue.push_front(dest_tile.to)
+    position = Coords.to_transform(grid_position)
+
+func _moving_exit() -> void:
+    grid_position += Compass.get_vector2i(moving_dirs[animation])
+    # TODO: refactor the gameboard dictionary to include all tiles in and
+    # around the board, so we can reference that for all tile information
+    if grid_position == end_tile:
+        anim_queue.push_front("idle")
+        anim_queue.push_front("despawning")
         return
 
-    # cube is spawning, so it will either move forward or left
-    if current_state == States.SPAWNING:
-        state_queue.push_front(States.IDLE)
-        if start_tile.x > GameBoard.MAX_X:
-            state_queue.push_front(States.MOVING_LEFT)
-        else:
-            state_queue.push_front(States.MOVING_FORWARD)
+    if not GameBoard.current_tiles.has(grid_position):
+        anim_queue.push_front("dying")
         return
 
+    var dest_tile: Road = GameBoard.current_tiles[grid_position]
 
-## Handles the special logic for each state
-func _enter_current_state() -> void:
-    if current_state <= States.MOVING_RIGHT:
-        tile_pos += Compass.get_vector2i(current_state)
+    if dest_tile.to == Compass.get_rotate_180(dest_tile.from):
+        anim_queue.push_front("idle")
+        anim_queue.push_front(animation)
+    else:
+        anim_queue.push_front("idle")
+        anim_queue.push_front(moving_dirs[dest_tile.to])
+
+
+func _dying_exit() -> void:
+    queue_free()
+
+
+func _idle_exit() -> void:
+    pass
+
+
+func _spawning_exit() -> void:
+    anim_queue.push_front("idle")
+    if start_tile.x > GameBoard.MAX_X:
+        anim_queue.push_front("moving_left")
+    else:
+        anim_queue.push_front("moving_forward")

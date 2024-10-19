@@ -1,18 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://djdtemfo5eae5"]
+[gd_scene load_steps=4 format=3 uid="uid://djdtemfo5eae5"]
 
 [ext_resource type="PackedScene" uid="uid://cxx55hw0nhryn" path="res://scenes/grid.tscn" id="2_g0srr"]
 [ext_resource type="PackedScene" uid="uid://bhk5h8m2bcty" path="res://scenes/pieces.tscn" id="3_yrvjp"]
-[ext_resource type="PackedScene" uid="uid://bsg844s72wkgj" path="res://scenes/cube.tscn" id="4_cwqcm"]
-[ext_resource type="PackedScene" uid="uid://n54il8ephkdo" path="res://scenes/animated_cube.tscn" id="4_og5jq"]
+[ext_resource type="PackedScene" uid="uid://0bs1qrfn1gb7" path="res://scenes/cube_spawner.tscn" id="4_xwmfg"]
 
 [node name="Node" type="Node2D"]
 y_sort_enabled = true
+position = Vector2(-24, -96)
 
 [node name="Grid" parent="." instance=ExtResource("2_g0srr")]
 
 [node name="Pieces" parent="." instance=ExtResource("3_yrvjp")]
 
-[node name="Cube" parent="." instance=ExtResource("4_cwqcm")]
-visible = false
-
-[node name="AnimatedCube" parent="." instance=ExtResource("4_og5jq")]
+[node name="CubeSpawner" parent="." instance=ExtResource("4_xwmfg")]

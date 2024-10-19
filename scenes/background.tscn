@@ -19,6 +19,7 @@ sources/0 = SubResource("TileSetAtlasSource_xc2yt")
 sources/1 = SubResource("TileSetAtlasSource_1whvd")
 
 [node name="Background" type="TileMap"]
+position = Vector2(-192, -144)
 tile_set = SubResource("TileSet_mlsbv")
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 1, 0, 2, 1, 0, 131072, 1, 0, 131074, 1, 0, 65537, 1, 0, 65536, 0, 0, 131073, 0, 0, 1, 0, 0, 65538, 0, 0, 65535, 0, 0, 3, 0, 0, 196607, 0, 0, 131075, 0, 0, -65536, 0, 0, -65534, 0, 0, 196608, 0, 0, 196610, 0, 0, 196609, 1, 0, 262143, 1, 0, 196611, 1, 0, 131071, 1, 0, 65539, 1, 0, -65535, 1, 0, -1, 1, 0, -65533, 1, 0)

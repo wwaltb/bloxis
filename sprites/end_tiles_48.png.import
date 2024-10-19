@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4ah6gq5lyfhn"
-path="res://.godot/imported/spawn_tiles_48.png-94b5bc52a4086b55ceb86f7919ce99bd.ctex"
+uid="uid://fy2opsgn1ins"
+path="res://.godot/imported/end_tiles_48.png-c7f867cf4d9902077bbd667afe1c508f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/spawn_tiles_48.png"
-dest_files=["res://.godot/imported/spawn_tiles_48.png-94b5bc52a4086b55ceb86f7919ce99bd.ctex"]
+source_file="res://sprites/end_tiles_48.png"
+dest_files=["res://.godot/imported/end_tiles_48.png-c7f867cf4d9902077bbd667afe1c508f.ctex"]
 
 [params]
 
