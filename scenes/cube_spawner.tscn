@@ -5,4 +5,3 @@
 [node name="CubeSpawner" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_4rd87")
-spawn_delay = null

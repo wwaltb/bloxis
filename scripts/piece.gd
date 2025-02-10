@@ -67,7 +67,7 @@ func is_placeable() -> bool:
         return false
     for i in range(size):
         var cell: Vector2i = position + cells[i]
-        if GameBoard.current_tiles.has(cell):
+        if typeof(GameBoard.current_tiles[cell]) == TYPE_OBJECT:
             return false
     return true
 

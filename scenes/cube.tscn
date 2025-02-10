@@ -305,6 +305,11 @@ animations = [{
 "name": &"moving_right",
 "speed": 5.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"none",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_oef01")
@@ -329,6 +334,6 @@ animations = [{
 [node name="Cube" type="AnimatedSprite2D"]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_dy535")
-animation = &"despawning"
+animation = &"dying"
 offset = Vector2(0, -24)
 script = ExtResource("4_sy7vc")

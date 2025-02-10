@@ -1,10 +1,14 @@
-extends AnimatedSprite2D
 class_name SpawnTile
+extends AnimatedSprite2D
 
 signal spawn_cube
 
 var spawn_delay: float
 
+## queue (front -> back) of animation states in the form:
+## duration: float [optional]
+## name: StringName
+## exit_function: Callable [optional]
 var anim_queue: Array
 var anim_duration: float
 
@@ -57,7 +61,10 @@ func _spawn_cube() -> void:
 
 
 func _despawn_tile() -> void:
-    anim_queue.push_front(-PI)
     anim_queue.push_front("despawning")
-    anim_queue.push_front(self.queue_free)
+    anim_queue.push_front(self._free)
+
+
+func _free() -> void:
+    queue_free()
     anim_queue.push_front("none")

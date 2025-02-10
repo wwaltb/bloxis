@@ -1,6 +1,8 @@
 class_name Cube
 extends AnimatedSprite2D
 
+signal despawned
+
 var grid_position: Vector2i = Vector2i(0, 0)
 var start_tile: Vector2i
 var end_tile: Vector2i
@@ -17,6 +19,7 @@ var anim_exit_funcs: Dictionary = {
     "moving_left": Callable(self, "_moving_exit"),
     "moving_right": Callable(self, "_moving_exit"),
     "spawning": Callable(self, "_spawning_exit"),
+    "despawning": Callable(self, "_despawning_exit")
 }
 
 var moving_dirs: Dictionary = {
@@ -50,26 +53,39 @@ func _moving_exit() -> void:
     grid_position += Compass.get_vector2i(moving_dirs[animation])
     # TODO: refactor the gameboard dictionary to include all tiles in and
     # around the board, so we can reference that for all tile information
-    if grid_position == end_tile:
+    if typeof(GameBoard.current_tiles[grid_position]) == TYPE_OBJECT:
+        var dest_tile: Road = GameBoard.current_tiles[grid_position]
+    
+        if dest_tile.to == Compass.get_rotate_180(dest_tile.from):
+            anim_queue.push_front("idle")
+            anim_queue.push_front(animation)
+        else:
+            anim_queue.push_front("idle")
+            anim_queue.push_front(moving_dirs[dest_tile.to])
+
+        return
+    
+    if GameBoard.current_tiles[grid_position] == GameBoard.Tiles.END:
         anim_queue.push_front("idle")
         anim_queue.push_front("despawning")
         return
 
-    if not GameBoard.current_tiles.has(grid_position):
+    if GameBoard.current_tiles[grid_position] == GameBoard.Tiles.VOID:
         anim_queue.push_front("dying")
         return
 
-    var dest_tile: Road = GameBoard.current_tiles[grid_position]
-
-    if dest_tile.to == Compass.get_rotate_180(dest_tile.from):
-        anim_queue.push_front("idle")
-        anim_queue.push_front(animation)
-    else:
-        anim_queue.push_front("idle")
-        anim_queue.push_front(moving_dirs[dest_tile.to])
+    if GameBoard.current_tiles[grid_position] == GameBoard.Tiles.GRID:
+        anim_queue.push_front("dying")
+        return
 
 
 func _dying_exit() -> void:
+    despawned.emit()
+    queue_free()
+
+
+func _despawning_exit() -> void:
+    despawned.emit()
     queue_free()
 
 
