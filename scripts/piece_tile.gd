@@ -33,6 +33,8 @@ const TILE_ATLAS: Dictionary = {
 var from: int   ## The direction this tile comes from
 var to: int     ## The direction this tile goes to
 
+var color: int
+
 
 ## Returns the tile's tileset id.
 func get_id() -> int:
@@ -41,14 +43,14 @@ func get_id() -> int:
 
 ## Returns the tileset atlas coordinates for the tile's sprite.
 func get_atlas_coords() -> Vector2i:
-    return TILE_ATLAS[from][to]
+    return Vector2i(TILE_ATLAS[from][to].x, TILE_ATLAS[from][to].y + color)
 
 
 ## Generates a new random tile. If @prev tile is given the new tile will
 ## connect to it.
 
 ## Creates a new tile with random directions unless given through @f and/or @t
-func _init(f: int = -1, t: int = -1) -> void:
+func _init(f: int = -1, t: int = -1, c: int = 0) -> void:
     # try to assign @to and @from based on @t and @f
     if f >= 0:
         from = f
@@ -63,3 +65,6 @@ func _init(f: int = -1, t: int = -1) -> void:
     # ensure @to is different than @from
     if t < 0 or t == f:
         to = Compass.get_random_other_than(from)
+    # set color
+    color = c
+    print(color)

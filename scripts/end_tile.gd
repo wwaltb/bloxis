@@ -8,8 +8,10 @@ extends AnimatedSprite2D
 var anim_queue: Array
 var anim_duration: float
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    speed_scale = 1.5
     play("none")
     _spawn_tile()
 
@@ -18,15 +20,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
     if anim_duration <= 0 and anim_duration > -PI:
         if typeof(anim_queue.back()) == TYPE_CALLABLE:
-            anim_queue.pop_back().call()                # [pop the corresponding callable]
+            anim_queue.pop_back().call()  # [pop the corresponding callable]
 
         if typeof(anim_queue.back()) == TYPE_FLOAT:
-            anim_duration = anim_queue.pop_back()       # [pop the new duration]
+            anim_duration = anim_queue.pop_back()  # [pop the new duration]
         else:
             anim_duration = _get_animation_duration(anim_queue.back())
 
-        play(anim_queue.pop_back())                     # pop the old animation string
-            
+        play(anim_queue.pop_back())  # pop the old animation string
+
     anim_duration -= delta
 
 

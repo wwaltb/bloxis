@@ -56,6 +56,7 @@ func _update_pieces() -> void:
     var x: int = roundi(float(GameBoard.MAX_X) / 2)
     var y: int = roundi(float(GameBoard.MAX_Y) / 2)
     new.position = Vector2i(x, y)
+    print(new.color)
 
     # update our active piece tile map layers to use the new piece
     active_piece.piece = new
@@ -65,11 +66,11 @@ func _update_pieces() -> void:
     active_outline.indicator = active_indicator
 
     if active_piece.piece.size == 1:
-        active_indicator.cell = active_piece.piece.position + active_piece.piece.cells[0]
-        active_indicator.dir = active_piece.piece.tiles[0].to
+        active_indicator.cell = new.position + new.cells[0]
+        active_indicator.dir = new.tiles[0].to
     else:
-        active_indicator.cell = active_piece.piece.position + active_piece.piece.cells[1]
-        active_indicator.dir = active_piece.piece.tiles[1].to
+        active_indicator.cell = new.position + new.cells[1]
+        active_indicator.dir = new.tiles[1].to
 
 
 func _handle_rotation_input() -> void:

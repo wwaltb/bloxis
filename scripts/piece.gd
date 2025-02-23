@@ -8,6 +8,8 @@ var cells: Array[Vector2i]  ## The list of cells the piece occupies at the origi
 
 var position = Vector2i(0, 0)
 
+var color = 0
+
 
 ## Add @offset to the piece's position.
 func move_piece(offset: Vector2i):
@@ -68,8 +70,9 @@ func is_placeable() -> bool:
 
 ## Initialize a new piece that connects the given directions starting from
 ## North.
-func _init(dirs: Array[int]) -> void:
+func _init(dirs: Array[int], c: int) -> void:
     size = dirs.size()
+    color = c
     _generate_piece(dirs)
 
 
@@ -77,10 +80,10 @@ func _init(dirs: Array[int]) -> void:
 func _generate_piece(dirs: Array[int]) -> void:
     for i in range(dirs.size()):
         if i == 0:
-            tiles.append(PieceTile.new(Compass.N, dirs[i]))
+            tiles.append(PieceTile.new(Compass.N, dirs[i], color))
             cells.append(Vector2i.ZERO)
         else:
-            tiles.append(PieceTile.new(Compass.get_rotate_180(dirs[i-1]), dirs[i]))
+            tiles.append(PieceTile.new(Compass.get_rotate_180(dirs[i-1]), dirs[i], color))
             cells.append(cells[i-1] + Compass.get_vector2i(dirs[i-1]))
     _center_piece()
 

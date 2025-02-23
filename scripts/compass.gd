@@ -7,12 +7,7 @@ extends Node
 const NUM_DIRS = 4
 
 ## Cardinal directions
-enum {
-    N,  ## North
-    E,  ## East
-    S,  ## South
-    W   ## West
-}
+enum { N, E, S, W }
 
 
 ## returns a random direction

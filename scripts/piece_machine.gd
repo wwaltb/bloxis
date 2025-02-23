@@ -9,7 +9,7 @@ var singles: Array[Piece]
 var couples: Array[Piece]
 var throuples: Array[Piece]
 
-var piece_stack: Array[Piece] ## Stack of ready pieces. Use get_piece() to grab one.
+var piece_stack: Array[Piece]  ## Stack of ready pieces. Use get_piece() to grab one.
 
 
 ## Create a piece machine with a set of pieces loaded into @piece_stack.
@@ -41,7 +41,7 @@ func _new_set() -> void:
     for i in range(NUM_BAGS):
         _generate_bag()
     piece_stack.shuffle()
-        
+
 
 ## Generates each individual bag for the new set. Has the job of finding unique
 ## pieces when applicable.
@@ -54,31 +54,28 @@ func _generate_bag() -> void:
 
 ## Create our game pieces (one-long up to three-long)
 func _initialize_pieces() -> void:
-    singles = [
-        Piece.new([Compass.S]),
-        Piece.new([Compass.W])
-    ]
+    singles = [Piece.new([Compass.S], 0), Piece.new([Compass.W], 0)]
     couples = [
-        Piece.new([Compass.S, Compass.S]),
-        Piece.new([Compass.S, Compass.W]),
-        Piece.new([Compass.S, Compass.E]),
-        Piece.new([Compass.W, Compass.N]),
-        Piece.new([Compass.W, Compass.S]),
-        Piece.new([Compass.E, Compass.S])
+        Piece.new([Compass.S, Compass.S], 0),
+        Piece.new([Compass.S, Compass.W], 1),
+        Piece.new([Compass.S, Compass.E], 2),
+        Piece.new([Compass.W, Compass.N], 3),
+        Piece.new([Compass.W, Compass.S], 4),
+        Piece.new([Compass.E, Compass.S], 0)
     ]
     throuples = [
-        Piece.new([Compass.S, Compass.S, Compass.S]),
-        Piece.new([Compass.S, Compass.S, Compass.W]),
-        Piece.new([Compass.S, Compass.S, Compass.E]),
-        Piece.new([Compass.S, Compass.W, Compass.S]),
-        Piece.new([Compass.S, Compass.W, Compass.W]),
-        Piece.new([Compass.S, Compass.W, Compass.N]),
-        Piece.new([Compass.S, Compass.E, Compass.S]),
-        Piece.new([Compass.S, Compass.E, Compass.N]),
-        Piece.new([Compass.W, Compass.S, Compass.W]),
-        Piece.new([Compass.W, Compass.S, Compass.E]),
-        Piece.new([Compass.W, Compass.W, Compass.N]),
-        Piece.new([Compass.W, Compass.W, Compass.S]),
-        Piece.new([Compass.E, Compass.S, Compass.W]),
-        Piece.new([Compass.E, Compass.E, Compass.S])
+        Piece.new([Compass.S, Compass.S, Compass.S], 0),
+        Piece.new([Compass.S, Compass.S, Compass.W], 1),
+        Piece.new([Compass.S, Compass.S, Compass.E], 2),
+        Piece.new([Compass.S, Compass.W, Compass.S], 3),
+        Piece.new([Compass.S, Compass.W, Compass.W], 4),
+        Piece.new([Compass.S, Compass.W, Compass.N], 0),
+        Piece.new([Compass.S, Compass.E, Compass.S], 1),
+        Piece.new([Compass.S, Compass.E, Compass.N], 2),
+        Piece.new([Compass.W, Compass.S, Compass.W], 3),
+        Piece.new([Compass.W, Compass.S, Compass.E], 4),
+        Piece.new([Compass.W, Compass.W, Compass.N], 0),
+        Piece.new([Compass.W, Compass.W, Compass.S], 1),
+        Piece.new([Compass.E, Compass.S, Compass.W], 2),
+        Piece.new([Compass.E, Compass.E, Compass.S], 3)
     ]
