@@ -3,6 +3,7 @@ extends TileMapLayer
 
 var piece: Piece  ## The active piece. Parent should keep this updated.
 var indicator: PieceIndicator
+var alternative = 0
 
 
 func clearPieceAndIndicator() -> void:
@@ -22,7 +23,7 @@ func drawPieceAndIndicator() -> void:
 func drawOutline() -> void:
     for i in range(piece.size):
         var cell: Vector2i = piece.position + piece.cells[i]
-        set_cell(cell, 0, Vector2i(0, 0))
+        set_cell(cell, 0, Vector2i(0, 0), alternative)
 
 
 ## Calls rotate_left() for @piece. If the new position is out of bounds

@@ -104,6 +104,7 @@ animations = [{
 }]
 
 [node name="SpawnTileLeft" type="AnimatedSprite2D"]
+z_index = 2
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_chh2e")
 animation = &"none"

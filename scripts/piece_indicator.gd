@@ -10,10 +10,11 @@ const ATLAS_COORDS_HASH: Dictionary = {
 
 var cell: Vector2i
 var dir: int
+var alternative = 0
 
 
 func draw() -> void:
-    set_cell(cell, 0, ATLAS_COORDS_HASH[dir])
+    set_cell(cell, 0, ATLAS_COORDS_HASH[dir], alternative)
 
 
 func rotate_indicator() -> void:

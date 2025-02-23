@@ -332,7 +332,8 @@ animations = [{
 }]
 
 [node name="Cube" type="AnimatedSprite2D"]
-z_index = 1
+z_index = 3
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_dy535")
 animation = &"dying"
 offset = Vector2(0, -24)

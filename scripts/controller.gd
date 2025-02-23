@@ -11,9 +11,9 @@ const DAS_DELAY: float = 0.28
 const DAS_RATE: float = 0.058
 
 @onready var board: Board = $Board
+@onready var active_piece: Active = $Active
 @onready var active_outline: Active = $ActiveOutline
-@onready var active: Active = $Active
-@onready var indicator: PieceIndicator = $PieceIndicator
+@onready var active_indicator: PieceIndicator = $PieceIndicator
 
 var generator: PieceMachine = PieceMachine.new()
 
@@ -29,35 +29,54 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+    # clear active_piece piece sprites
     active_outline.clear()
-    active.clearPieceAndIndicator()
+    active_piece.clearPieceAndIndicator()
+
+    # update placeable indication colors
+    if active_piece.piece.is_placeable():
+        active_outline.alternative = 0
+        active_indicator.alternative = 0
+    else:
+        active_outline.alternative = 1
+        active_indicator.alternative = 2
+
+    # handle inputs
     _handle_movement_input(delta)
     _handle_rotation_input()
     _handle_placement_input()
+
     active_outline.drawOutline()
-    active.drawPieceAndIndicator()
+    active_piece.drawPieceAndIndicator()
 
 
 func _update_pieces() -> void:
-    active.indicator = indicator
-    active.piece = generator.active()
-    active.piece.position = Vector2i(GameBoard.MAX_X / 2, GameBoard.MAX_Y / 2)
-    if active.piece.size == 1:
-        indicator.cell = active.piece.position + active.piece.cells[0]
-        indicator.dir = active.piece.tiles[0].to
+    # get the next active piece and update it's position
+    var new: Piece = generator.active()
+    var x: int = roundi(float(GameBoard.MAX_X) / 2)
+    var y: int = roundi(float(GameBoard.MAX_Y) / 2)
+    new.position = Vector2i(x, y)
+
+    # update our active piece tile map layers to use the new piece
+    active_piece.piece = new
+    active_piece.indicator = active_indicator
+
+    active_outline.piece = new
+    active_outline.indicator = active_indicator
+
+    if active_piece.piece.size == 1:
+        active_indicator.cell = active_piece.piece.position + active_piece.piece.cells[0]
+        active_indicator.dir = active_piece.piece.tiles[0].to
     else:
-        indicator.cell = active.piece.position + active.piece.cells[1]
-        indicator.dir = active.piece.tiles[1].to
-    active_outline.indicator = indicator
-    active_outline.piece = generator.active()
-    active_outline.piece.position = Vector2i(GameBoard.MAX_X / 2, GameBoard.MAX_Y / 2)
+        active_indicator.cell = active_piece.piece.position + active_piece.piece.cells[1]
+        active_indicator.dir = active_piece.piece.tiles[1].to
 
 
 func _handle_rotation_input() -> void:
     if Input.is_action_just_pressed("rotate_left"):
-        active.rotate_left()
+        active_piece.rotate_left()
     if Input.is_action_just_pressed("rotate_right"):
-        active.rotate_right()
+        active_piece.rotate_right()
 
 
 func _handle_movement_input(delta: float) -> void:
@@ -66,7 +85,7 @@ func _handle_movement_input(delta: float) -> void:
     # if new dir(s) on the stack move immediately and reset @das_repeat_count.
     _check_just_pressed()
     if das_dir_stack.size() > stack_count:
-        active.move(das_dir_stack.back())
+        active_piece.move(das_dir_stack.back())
         _reset_das()
         _process_das(delta)
         return
@@ -99,7 +118,7 @@ func _process_das(delta: float) -> void:
         return
 
     # DAS is activated and should move the piece:
-    active.move(das_dir_stack.back())
+    active_piece.move(das_dir_stack.back())
     das_repeat_count = 0
 
 
@@ -119,11 +138,11 @@ func _check_just_pressed() -> void:
 func _handle_placement_input() -> void:
     if not Input.is_action_just_pressed("place"):
         return
-    if not active.piece.is_placeable():
+    if not active_piece.piece.is_placeable():
         return
 
     # TODO: board should contain the gameboard current pieces object
-    GameBoard.add_piece(active.piece)
-    board.draw(active.piece)
+    GameBoard.add_piece(active_piece.piece)
+    board.draw(active_piece.piece)
     generator.new_piece()
     _update_pieces()
