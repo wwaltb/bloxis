@@ -155,7 +155,7 @@ func _new_active_piece() -> void:
 ## Draw @piece to its cells on tilemap layer @layer
 func _draw_piece(piece: Piece, layer: int) -> void:
     for i in range(piece.size):
-        var road: Road = piece.roads[i]
+        var road: Road = piece.tiles[i]
         var cell: Vector2i = piece.position + piece.cells[i]
         set_cell(layer, cell, road.get_id(), road.get_atlas_coords())
 

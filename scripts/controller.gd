@@ -11,13 +11,16 @@ const DAS_DELAY: float = 0.28
 const DAS_RATE: float = 0.058
 
 @onready var board: Board = $Board
+@onready var active_outline: Active = $ActiveOutline
 @onready var active: Active = $Active
+@onready var indicator: PieceIndicator = $PieceIndicator
 
 var generator: PieceMachine = PieceMachine.new()
 
 var das_count: float = 0
 var das_dir_stack: Array[Vector2i]
 var das_repeat_count: float = DAS_RATE
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,16 +29,28 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-    active.clear()
+    active_outline.clear()
+    active.clearPieceAndIndicator()
     _handle_movement_input(delta)
     _handle_rotation_input()
     _handle_placement_input()
-    active.draw()
+    active_outline.drawOutline()
+    active.drawPieceAndIndicator()
 
 
 func _update_pieces() -> void:
+    active.indicator = indicator
     active.piece = generator.active()
-    active.piece.position = Vector2i(GameBoard.MAX_X/2, GameBoard.MAX_Y/2)
+    active.piece.position = Vector2i(GameBoard.MAX_X / 2, GameBoard.MAX_Y / 2)
+    if active.piece.size == 1:
+        indicator.cell = active.piece.position + active.piece.cells[0]
+        indicator.dir = active.piece.tiles[0].to
+    else:
+        indicator.cell = active.piece.position + active.piece.cells[1]
+        indicator.dir = active.piece.tiles[1].to
+    active_outline.indicator = indicator
+    active_outline.piece = generator.active()
+    active_outline.piece.position = Vector2i(GameBoard.MAX_X / 2, GameBoard.MAX_Y / 2)
 
 
 func _handle_rotation_input() -> void:
@@ -91,7 +106,7 @@ func _process_das(delta: float) -> void:
 func _reset_das() -> void:
     das_count = 0
     das_repeat_count = DAS_RATE
-        
+
 
 ## Checks the movement inputs for any that were just pressed. Pushes any
 ## directions that were to the DAS stack.
@@ -103,10 +118,10 @@ func _check_just_pressed() -> void:
 
 func _handle_placement_input() -> void:
     if not Input.is_action_just_pressed("place"):
-        return 
+        return
     if not active.piece.is_placeable():
         return
-    
+
     # TODO: board should contain the gameboard current pieces object
     GameBoard.add_piece(active.piece)
     board.draw(active.piece)

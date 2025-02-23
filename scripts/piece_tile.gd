@@ -1,13 +1,13 @@
-class_name Road
+class_name PieceTile
 extends RefCounted
 # ! Old code, but could possibly reuse for tiles, maybe just treat straight tiles as blank ones
-## Keeps track of the directions each road points and which sprite they are
+## Keeps track of the directions each tile points and which sprite they are
 ##
-## Uses @from and @to to track the directions the road points. @get_id() and
-## @get_atlas_coords() provide the id and coordinates for the road's sprite.
+## Uses @from and @to to track the directions the tile points. @get_id() and
+## @get_atlas_coords() provide the id and coordinates for the tile's sprite.
 
-const ROAD_ID: int = 1
-const ROAD_ATLAS: Dictionary = {
+const TILE_ID: int = 1
+const TILE_ATLAS: Dictionary = {
     Compass.N: {
         Compass.E: Vector2i(2, 0),
         Compass.S: Vector2i(0, 0),
@@ -30,24 +30,24 @@ const ROAD_ATLAS: Dictionary = {
     },
 }
 
-var from: int   ## The direction this road comes from
-var to: int     ## The direction this road goes to
+var from: int   ## The direction this tile comes from
+var to: int     ## The direction this tile goes to
 
 
-## Returns the road's tileset id.
+## Returns the tile's tileset id.
 func get_id() -> int:
-    return ROAD_ID
+    return TILE_ID
 
 
-## Returns the tileset atlas coordinates for the road's sprite.
+## Returns the tileset atlas coordinates for the tile's sprite.
 func get_atlas_coords() -> Vector2i:
-    return ROAD_ATLAS[from][to]
+    return TILE_ATLAS[from][to]
 
 
-## Generates a new random road. If @prev road is given the new road will
+## Generates a new random tile. If @prev tile is given the new tile will
 ## connect to it.
 
-## Creates a new road with random directions unless given through @f and/or @t
+## Creates a new tile with random directions unless given through @f and/or @t
 func _init(f: int = -1, t: int = -1) -> void:
     # try to assign @to and @from based on @t and @f
     if f >= 0:
